@@ -8,7 +8,7 @@ class FireFly(Point):
         super().__init__(**kwargs)
         self.__alfa: float = kwargs.get("alfa", 1e-1)
         self.__beta: float = kwargs.get("beta", 1)
-        self.__gamma: float = kwargs.get("gamma", 1 / self.scale_length**2)
+        self.__gamma: float = kwargs.get("gamma", 1 / (self.scale_length ** 2))
 
     def move_towards(self, other: "FireFly") -> None:
         dist_v = other.position - self.position
