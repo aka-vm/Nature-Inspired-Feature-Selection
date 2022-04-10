@@ -1,4 +1,3 @@
-from math import gamma
 import numpy as np
 from typing import List, Callable
 from copy import deepcopy
@@ -13,9 +12,11 @@ class FireflyOptimizer:
         self.fireflies_num: int = kwargs.get("fireflies_num", 100)
         self.__fireflies = [FireFly(**kwargs) for _ in range(self.fireflies_num)]
 
-    def optimize(self) -> List[FireFly]:
-        best = deepcopy(max(self.__fireflies))
-        for _ in range(self.max_irterations):
+    def optimize(self, max_irterations: int = None) -> List[FireFly]:
+        max_irterations = max_irterations or self.max_irterations
+        best = deepcopy(max(self.__fireflies, key=lambda x: x.fitness_value))
+
+        for _ in range(max_irterations):
             for firefly in self.__fireflies:
                 for targate_firefly in self.__fireflies:
                     if firefly < targate_firefly:
@@ -27,4 +28,4 @@ class FireflyOptimizer:
 
             temp_best.position += temp_best.random_targate()
 
-        return self.__fireflies
+        return best

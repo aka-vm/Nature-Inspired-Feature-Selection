@@ -20,7 +20,8 @@ class Point:
         self.__initalize()
 
     def __initalize(self) -> None:
-        self.position = self.rand_fnx(self.lower_bound, self.upper_bound, self.dimensions)
+        mean_ = (self.upper_bound + self.lower_bound) / 2
+        self.position = self.rand_fnx(mean_, self.scale_length, self.dimensions)
 
     @property
     def position(self) -> np.ndarray:
