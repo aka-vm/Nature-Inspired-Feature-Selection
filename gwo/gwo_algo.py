@@ -41,5 +41,5 @@ class GWOptimizer:
 
     @property
     def get_alpha_beta_delta(self) -> tuple[Wolf, Wolf, Wolf]:
-        best_three_i = np.argsort(self.__wolves)[-3:]
+        best_three_i = np.argsort(self.__wolves)[-3:][::-1]
         return [deepcopy(self.__wolves[i]) for i in best_three_i]

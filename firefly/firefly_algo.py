@@ -10,9 +10,9 @@ class FireflyOptimizer:
     def __init__(self, **kwargs) -> None:
         self.max_irterations: int = kwargs.get("max_irterations", 20)
         self.fireflies_num: int = kwargs.get("fireflies_num", 100)
-        self.__fireflies = [FireFly(**kwargs) for _ in range(self.fireflies_num)]
+        self.__fireflies: List[FireFly] = [FireFly(**kwargs) for _ in range(self.fireflies_num)]
 
-    def optimize(self, max_irterations: int = None) -> List[FireFly]:
+    def optimize(self, max_irterations: int = None) -> FireFly:
         max_irterations = max_irterations or self.max_irterations
         best = deepcopy(max(self.__fireflies, key=lambda x: x.fitness_value))
 
