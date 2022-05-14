@@ -1,7 +1,7 @@
 from turtle import pos
 import numpy as np
 
-from utils.point import Point
+from ..utils.point import Point
 
 class Wolf(Point):
 
