@@ -1,6 +1,6 @@
 from math import gamma
 import numpy as np
-from typing import List, Callable
+from typing import List, Callable, Tuple
 from copy import deepcopy
 
 from .wolf import Wolf
@@ -12,9 +12,11 @@ class GWOptimizer:
         self.wolf_num: int = kwargs.get("wolf_num", 20)
         self.__wolves: List[Wolf] = [Wolf(**kwargs) for _ in range(self.wolf_num)]
 
+        self.alpha, self.beta, self.delta = self.get_alpha_beta_delta
+
     def optimize(self, max_irterations: int = None) -> Wolf:
         max_irterations = max_irterations or self.max_irterations
-        alpha, beta, delta = self.get_alpha_beta_delta
+        alpha, beta, delta = self.alpha, self.beta, self.delta
         best = deepcopy(alpha)
 
         for i in range(max_irterations):
@@ -37,9 +39,10 @@ class GWOptimizer:
             if best < alpha:
                 best = deepcopy(alpha)
 
+        self.alpha, self.beta, self.delta = alpha, beta, delta
         return best
 
     @property
-    def get_alpha_beta_delta(self) -> tuple[Wolf, Wolf, Wolf]:
+    def get_alpha_beta_delta(self) -> Tuple[Wolf, Wolf, Wolf]:
         best_three_i = np.argsort(self.__wolves)[-3:][::-1]
         return [deepcopy(self.__wolves[i]) for i in best_three_i]
