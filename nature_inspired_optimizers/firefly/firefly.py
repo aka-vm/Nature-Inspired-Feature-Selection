@@ -1,6 +1,6 @@
 import numpy as np
 
-from utils.point import Point
+from ..utils.point import Point
 
 class FireFly(Point):
 
