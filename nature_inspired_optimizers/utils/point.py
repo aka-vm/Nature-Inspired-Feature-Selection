@@ -33,6 +33,8 @@ class Point:
     @position.setter
     def position(self, new_position: np.ndarray) -> None:
         self.__position = np.clip(new_position, a_min=self.lower_bound, a_max=self.upper_bound)
+
+    def update_fitness_value(self) -> None:
         self.fitness_value = self.fitness_function(self.position)
 
     def __str__(self) -> str:

@@ -4,6 +4,9 @@ import numpy as np
 from ..utils.point import Point
 
 class Wolf(Point):
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
+        self.update_fitness_value()
 
     def __move_towards(self, targate_position: np.ndarray, a_parameter: float) -> np.ndarray:
         a_vector = 2 * a_parameter * np.random.random(self.dimensions) - a_parameter
