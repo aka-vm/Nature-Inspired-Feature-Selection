@@ -1,4 +1,3 @@
-from math import gamma
 import numpy as np
 from typing import List, Callable, Tuple
 from copy import deepcopy
@@ -8,19 +7,19 @@ from .wolf import Wolf
 class GWOptimizer:
 
     def __init__(self, **kwargs):
-        self.max_irterations: int = kwargs.get("max_irterations", 20)
+        self.max_iterations: int = kwargs.get("max_iterations", 20)
         self.wolf_num: int = kwargs.get("wolf_num", 20)
         self.wolves: List[Wolf] = [Wolf(**kwargs) for _ in range(self.wolf_num)]
 
         self.alpha, self.beta, self.delta = self.get_alpha_beta_delta
 
-    def optimize(self, max_irterations: int = None) -> Wolf:
-        max_irterations = max_irterations or self.max_irterations
+    def optimize(self, max_iterations: int = None) -> Wolf:
+        max_iterations = max_iterations or self.max_iterations
         alpha, beta, delta = self.alpha, self.beta, self.delta
         best = deepcopy(alpha)
 
-        for i in range(max_irterations):
-            a_parameter = 2 * ((1 - i) / max_irterations)
+        for i in range(max_iterations):
+            a_parameter = 2 * ((1 - i) / max_iterations)
 
             for wolf in self.wolves:
                 wolf.move(a_parameter, alpha.position, beta.position, delta.position)

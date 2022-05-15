@@ -1,14 +1,10 @@
-from turtle import pos
 import numpy as np
 
 from ..utils.point import Point
 
 class Wolf(Point):
-    def __init__(self, **kwargs) -> None:
-        super().__init__(**kwargs)
-        self.update_fitness_value()
 
-    def __move_towards(self, targate_position: np.ndarray, a_parameter: float) -> np.ndarray:
+    def __step_towards(self, targate_position: np.ndarray, a_parameter: float) -> np.ndarray:
         a_vector = 2 * a_parameter * np.random.random(self.dimensions) - a_parameter
         c_vector = 2 * np.random.random(self.dimensions)
 
@@ -21,8 +17,8 @@ class Wolf(Point):
              beta_position:  np.ndarray,
              delta_position: np.ndarray) -> None:
 
-        x_1 = self.__move_towards(alpha_position, a_parameter)
-        x_2 = self.__move_towards(beta_position, a_parameter)
-        x_3 = self.__move_towards(delta_position, a_parameter)
+        x_1 = self.__step_towards(alpha_position, a_parameter)
+        x_2 = self.__step_towards(beta_position, a_parameter)
+        x_3 = self.__step_towards(delta_position, a_parameter)
 
         self.position = (x_1 + x_2 + x_3)/3
