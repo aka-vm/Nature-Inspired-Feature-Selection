@@ -10,7 +10,7 @@ class GWOptimizer:
     def __init__(self, **kwargs):
         self.max_irterations: int = kwargs.get("max_irterations", 20)
         self.wolf_num: int = kwargs.get("wolf_num", 20)
-        self.__wolves: List[Wolf] = [Wolf(**kwargs) for _ in range(self.wolf_num)]
+        self.wolves: List[Wolf] = [Wolf(**kwargs) for _ in range(self.wolf_num)]
 
         self.alpha, self.beta, self.delta = self.get_alpha_beta_delta
 
@@ -22,8 +22,9 @@ class GWOptimizer:
         for i in range(max_irterations):
             a_parameter = 2 * ((1 - i) / max_irterations)
 
-            for wolf in self.__wolves:
+            for wolf in self.wolves:
                 wolf.move(a_parameter, alpha.position, beta.position, delta.position)
+                wolf.update_fitness_value()
 
             alpha_, beta_, delta_ = self.get_alpha_beta_delta
 
@@ -44,5 +45,5 @@ class GWOptimizer:
 
     @property
     def get_alpha_beta_delta(self) -> Tuple[Wolf, Wolf, Wolf]:
-        best_three_i = np.argsort(self.__wolves)[-3:][::-1]
-        return [deepcopy(self.__wolves[i]) for i in best_three_i]
+        best_three_i = np.argsort(self.wolves)[-3:][::-1]
+        return [deepcopy(self.wolves[i]) for i in best_three_i]
