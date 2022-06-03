@@ -11,7 +11,7 @@ class Point:
         self.fitness_value: float   = 0.0
         self.__position: np.ndarray   = np.zeros(self.dimensions)
 
-        self.lower_bound: float = kwargs.get("lower_boud", 0.0)
+        self.lower_bound: float = kwargs.get("lower_boud", -1.0)
         self.upper_bound: float = kwargs.get("upper_boud", 1.0)
         self.scale_length: float = np.abs(self.upper_bound - self.lower_bound) / 2
         self.mid_point: float = (self.upper_bound + self.lower_bound) / 2
